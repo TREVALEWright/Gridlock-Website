@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products &amp; Services | Gridlock Interactive</title>
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --bg-card: #1e293b;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --promo-bg: linear-gradient(90deg, #7c3aed, #db2777);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --badge-bg: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Special Promo Banner */
+    .promo-banner {
+      background: var(--promo-bg);
+      color: white;
+      text-align: center;
+      padding: 12px 20px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .promo-code {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px dashed #fff;
+      font-family: monospace;
+      font-size: 1.1em;
+      margin-left: 6px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* How It Works (3-Step Process) */
+    .process-section {
+      background-color: var(--bg-card);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 40px;
+      border: 1px solid #334155;
+    }
+
+    .process-title {
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 1.5rem;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      text-align: center;
+    }
+
+    .step-card {
+      padding: 15px;
+      position: relative;
+    }
+
+    .step-number {
+      background-color: var(--accent);
+      color: var(--bg-dark);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+
+    .step-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+    }
+
+    .step-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Catalog Grid */
+    .catalog-title {
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+      border-left: 4px solid var(--accent);
+      padding-left: 12px;
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    /* Item Cards */
+    .card {
+      background-color: var(--bg-card);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #334155;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-visual {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+    }
+
+    /* Custom card gradients acting as clean product visuals */
+    .visual-1 { background: linear-gradient(135deg, #1d4ed8, #3b82f6); }
+    .visual-2 { background: linear-gradient(135deg, #047857, #10b981); }
+    .visual-3 { background: linear-gradient(135deg, #6d28d9, #8b5cf6); }
+    .visual-4 { background: linear-gradient(135deg, #b91c1c, #ef4444); }
+    .visual-5 { background: linear-gradient(135deg, #b45309, #f59e0b); }
+    .visual-6 { background: linear-gradient(135deg, #334155, #64748b); }
+
+    .badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background-color: var(--badge-bg);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    .badge.bundle {
+      background-color: #f59e0b;
+      color: #0f172a;
+    }
+
+    .card-content {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-category {
+      color: var(--accent);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .card-title {
+      font-size: 1.35rem;
+      margin: 4px 0 10px;
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    .feature-list li {
+      margin-bottom: 6px;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .feature-list li::before {
+      content: "✓";
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid #334155;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .price-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .btn {
+      background-color: var(--accent);
+      color: var(--bg-dark);
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn:hover {
+      background-color: var(--accent-hover);
+      color: #fff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 40px;
+      border-top: 1px solid #1e293b;
+    }
+    /* Navigation links between the three project pages */
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    nav a {
+      color: var(--text-main);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    nav a:hover,
+    nav a[aria-current="page"] {
+      color: var(--accent);
+    }
+
+    nav a:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Special Promo Banner -->
+  <div class="promo-banner">
+    🍂 AUTUMN GAMING SALE: Get 20% OFF sitewide on all consoles &amp; games! Use code: 
+    <span class="promo-code">FALLPLAY20</span>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <h1>Gridlock Interactive</h1>
+    <p>Next-gen hardware, classic consoles, and blockbuster titles delivered to your door.</p>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="page2.html" aria-current="page">Products &amp; Services</a>
+      <a href="page3.html">About Us &amp; Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- How It Works (3-Step Process) -->
+    <section class="process-section">
+      <h2 class="process-title">How It Works</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Order Online</h3>
+          <p>Browse our curated catalog and apply your promo code at checkout in seconds.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Low Shipping Costs</h3>
+          <p>Enjoy flat-rate $4.99 shipping on all orders, or free shipping over $50.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Fast Delivery</h3>
+          <p>Tracked 2-day express delivery straight to your doorstep with secure packaging.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catalog / Menu -->
+    <h2 class="catalog-title">Consoles &amp; Games Catalog</h2>
+    <section class="catalog-grid">
+
+      <!-- Item 1: Console -->
+      <article class="card">
+        <div class="card-visual visual-1">
+          🎮
+          <span class="badge bundle">Bundle Deal</span>
+        </div>
+        <div class="card-content">
+          <span class="card-category">Home Console</span>
+          <h3 class="card-title">NebulaStation Pro 1TB</h3>
+          <p class="card-desc">Experience ultra-fast load times and 4K ray-traced visuals with our flagship console bundle.</p>
+          <ul class="feature-list">
+            <li>1TB Custom NVMe SSD</li>
+            <li>Includes 2 Wireless Haptic Controllers</li>
+            <li>Free Digital Voucher for Starfall Odyssey</li>
+          </ul>
+          <div class="card-footer">
+            <div class="price-box">
+              <span class="old-price">$549.99</span>
+              <span class="price">$479.99</span>
+            </div>
+            <button class="btn">Add to Cart</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Item 2: Handheld Console -->
+      <article class="card">
+        <div class="card-visual visual-2">
+          🕹️
+          <span class="badge">Best Seller</span>
+        </div>
+        <div class="card-content">
+          <span class="card-category">Handheld Console</span>
+          <h3 class="card-title">PocketDeck OLED</h3>
+          <p class="card-desc">Take your entire PC and console library anywhere with a vibrant 7.4-inch HDR OLED screen.</p>
+          <ul class="feature-list">
+            <li>90Hz Anti-Glare OLED Display</li>
+            <li>Up to 8 Hours of Battery Life</li>
+            <li>Includes Hard-Shell Travel Case</li>
+          </ul>
+          <div class="card-footer">
+            <div class="price-box">
+              <span class="price">$399.00</span>
+            </div>
+            <button class="btn">Add to Cart</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Item 3: Retro Console -->
+      <article class="card">
+        <div class="card-visual visual-3">
+          👾
+          <span class="badge bundle">2-Player Pack</span>
+        </div>
+        <div class="card-content">
+          <span class="card-category">Retro Hardware</span>
+          <h3 class="card-title">HyperBit 16-Bit Mini</h3>
+          <p class="card-desc">Relive the golden age of arcade and couch co-op gaming in crisp 1080p HDMI output.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
